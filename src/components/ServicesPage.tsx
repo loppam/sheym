@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { useRef, useEffect } from "react";
 import { servicesData, specialtyPackages, addOns } from "./data/servicesData";
 import {
   Smartphone,
@@ -22,6 +23,48 @@ interface ServicesPageProps {
 
 export default function ServicesPage({ onNavigate }: ServicesPageProps) {
   const [activeTab, setActiveTab] = useState("social-media");
+  const swipeRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const container = swipeRef.current;
+    if (!container) return;
+    let startX = 0;
+    let currentX = 0;
+    let isSwiping = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      currentX = startX;
+      isSwiping = true;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isSwiping) return;
+      currentX = e.touches[0].clientX;
+    };
+    const onTouchEnd = () => {
+      if (!isSwiping) return;
+      const deltaX = currentX - startX;
+      const threshold = 50; // px
+      const keys = Object.keys(servicesData);
+      const index = keys.indexOf(activeTab);
+      if (deltaX <= -threshold && index < keys.length - 1) {
+        setActiveTab(keys[index + 1]);
+      } else if (deltaX >= threshold && index > 0) {
+        setActiveTab(keys[index - 1]);
+      }
+      isSwiping = false;
+    };
+
+    container.addEventListener("touchstart", onTouchStart, { passive: true });
+    container.addEventListener("touchmove", onTouchMove, { passive: true });
+    container.addEventListener("touchend", onTouchEnd);
+    return () => {
+      container.removeEventListener("touchstart", onTouchStart as EventListener);
+      container.removeEventListener("touchmove", onTouchMove as EventListener);
+      container.removeEventListener("touchend", onTouchEnd as EventListener);
+    };
+  }, [activeTab]);
 
   const serviceIcons = {
     "social-media": Smartphone,
@@ -97,7 +140,10 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
               return (
                 <TabsContent key={key} value={key} className="space-y-12">
                   {/* Service Header */}
-                  <div className="text-center">
+                  <div
+                    className="text-center"
+                    ref={key === activeTab ? swipeRef : undefined}
+                  >
                     <div className="w-20 h-20 sheytimah-highlight rounded-full flex items-center justify-center mx-auto mb-6">
                       <Icon
                         style={{
@@ -322,7 +368,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
                   ))}
                 </div>
                 <button
-                  className="w-full mt-6 border border-sheytimah-accent text-sheytimah-accent hover:bg-sheytimah-accent hover:text-white p-3 rounded-lg transition-all duration-300"
+                  className="w-full bg-white mt-6 py-4 border border-sheytimah-accent text-sheytimah-accent hover:bg-sheytimah-accent hover:text-white p-3 rounded-lg transition-all duration-300"
                   onClick={() => onNavigate("booking")}
                 >
                   Inquire About Package
@@ -358,7 +404,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
                   {addon.price}
                 </div>
                 <button
-                  className="border border-sheytimah-accent text-sheytimah-accent hover:bg-sheytimah-accent hover:text-white px-4 py-2 rounded-lg text-sm transition-all duration-300"
+                  className="border bg-white py-3 border-sheytimah-accent text-sheytimah-accent hover:bg-sheytimah-accent hover:text-white px-4 py-2 rounded-lg text-sm transition-all duration-300"
                   onClick={() => onNavigate("booking")}
                 >
                   Add to Package
