@@ -434,7 +434,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
               <ArrowRight style={{ width: "1.25rem", height: "1.25rem" }} />
             </button>
             <button
-              className="border-white text-white hover:bg-white hover:text-sheytimah-accent px-8 py-4 text-lg border-2 rounded-lg font-medium transition-all duration-300"
+              className="border-white-30 bg-transparent text-white hover:bg-white hover:text-sheytimah-accent px-8 py-4 text-lg border-2 rounded-lg font-medium transition-all duration-300"
               onClick={() => onNavigate("portfolio")}
             >
               View Our Work

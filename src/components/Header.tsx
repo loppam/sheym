@@ -38,6 +38,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             onClick={() => onNavigate('home')}
           >
             <div className="header-logo-text">
+              <img src="/logo.png" alt="Sheytimah Media" style={{ width: '30px', height: '30px' }} />
               <span className="header-logo-text-desktop">Sheytimah Media</span>
               <span className="header-logo-text-mobile">Sheytimah</span>
             </div>

@@ -785,6 +785,7 @@ select:focus-visible {
 .flex-responsive {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -1608,6 +1609,9 @@ select:focus-visible {
 .header-logo-text {
   font-size: clamp(1.25rem, 2vw, 1.5rem);
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--sheytimah-highlight);
   font-family: "Montserrat", sans-serif;
 }
