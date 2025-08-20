@@ -27,20 +27,20 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       expertise: ["Brand Strategy", "Creative Direction", "Account Recovery"],
     },
     {
-      name: "David Martinez",
-      role: "Social Media Strategist",
-      bio: "David specializes in creating data-driven social media strategies that convert followers into loyal customers.",
+      name: "Babatunde Halimat",
+      role: "UGC CREATOR",
+      bio: "Halimat is a UGC creator who specializes in creating data-driven social media strategies that convert followers into loyal customers.",
       image:
-        "https://images.unsplash.com/photo-1556157382-97eda2d62296?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBidXNpbmVzcyUyMHBvcnRyYWl0fGVufDF8fHx8MTc1NTA2OTE5MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      expertise: ["Social Strategy", "Analytics", "Campaign Management"],
+        "/halimat.jpg",
+      expertise: ["UGC Creator", "Social Media Management", "Content Creation"],
     },
     {
-      name: "Sarah Chen",
-      role: "Content Creator & Designer",
-      bio: "Sarah brings brands to life through stunning visuals and compelling content that resonates with audiences.",
+      name: "Bakre Jaafar",
+      role: "Operations Manager",
+      bio: "Jaafar brings brands to life through stunning visuals and compelling content that resonates with audiences.",
       image:
-        "https://images.unsplash.com/photo-1614786269829-d24616faf56d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dHklMjBidXNpbmVzcyUyMHdvbWFuJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzU1MDY5MTk1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      expertise: ["Graphic Design", "Video Production", "Brand Identity"],
+        "/Bakre.jpg",
+      expertise: ["Operations Manager", "Social Media Management"],
     },
     {
       name: "Michael Thompson",

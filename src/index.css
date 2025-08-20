@@ -2655,6 +2655,7 @@ select:focus-visible {
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0.5rem 1rem;
+  cursor: pointer;
   border-radius: 9999px;
 }
 
