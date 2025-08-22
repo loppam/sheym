@@ -43,12 +43,12 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       expertise: ["Operations Manager", "Social Media Management"],
     },
     {
-      name: "Michael Thompson",
-      role: "Paid Advertising Specialist",
-      bio: "Michael optimizes ad campaigns across all platforms to maximize ROI and drive sustainable business growth.",
+      name: "Mustapha Oluwadarasimi Peter",
+      role: "Technical Director",
+      bio: "Mustapha is a technical director who specializes in creating data-driven social media strategies that convert followers into loyal customers.",
       image:
-        "https://images.unsplash.com/photo-1556157382-97eda2d62296?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBidXNpbmVzcyUyMHBvcnRyYWl0fGVufDF8fHx8MTc1NTA2OTE5MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      expertise: ["Meta Ads", "Google Ads", "TikTok Ads"],
+        "/mustapha.jpg",
+      expertise: ["Social Media Manager ", "Website Lead Developer", "UiUx Product Designer"],
     },
   ];
 
