@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Filter, ArrowRight, Eye, ExternalLink } from "lucide-react";
+import { Filter, ArrowRight, Eye } from "lucide-react";
 
 interface PortfolioPageProps {
   onNavigate: (page: string) => void;
@@ -27,6 +27,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Elite Couture",
       category: "social-media",
       image: "fashion luxury brand social media",
+      imagesrc: "/social-media.jpg",
     },
     {
       id: 2,
@@ -34,6 +35,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Taste Haven",
       category: "content-creation",
       image: "restaurant food photography social media",
+      imagesrc: "/content-creation.jpg",
     },
     {
       id: 3,
@@ -41,6 +43,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Glow Cosmetics",
       category: "paid-advertising",
       image: "beauty brand marketing campaign",
+      imagesrc: "/paid-advertising.jpg",
     },
     {
       id: 4,
@@ -48,6 +51,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Tech Startup CEO",
       category: "account-recovery",
       image: "social media content creation professional",
+      imagesrc: "/account-recovery.jpg",
     },
     {
       id: 5,
@@ -55,6 +59,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Urban Lifestyle",
       category: "brand-development",
       image: "ecommerce brand development design",
+      imagesrc: "/brand-development.jpg",
     },
     {
       id: 6,
@@ -62,6 +67,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "FitLife Studios",
       category: "social-media",
       image: "fitness gym social media content",
+      imagesrc: "/social-media.jpg",
     },
     {
       id: 7,
@@ -69,6 +75,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Lagos Fashion Week",
       category: "paid-advertising",
       image: "fashion event marketing campaign",
+      imagesrc: "/paid-advertising.jpg",
     },
     {
       id: 8,
@@ -76,6 +83,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "TechCorp Nigeria",
       category: "social-media",
       image: "corporate business linkedin content",
+      imagesrc: "/social-media.jpg",
     },
     {
       id: 9,
@@ -83,6 +91,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Royal Suites",
       category: "content-creation",
       image: "luxury hotel photography marketing",
+      imagesrc: "/content-creation.jpg",
     },
     {
       id: 10,
@@ -90,6 +99,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "InnovateTech",
       category: "paid-advertising",
       image: "tech product launch marketing",
+      imagesrc: "/paid-advertising.jpg",
     },
     {
       id: 11,
@@ -97,6 +107,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Fresh Harvest",
       category: "brand-development",
       image: "food brand identity design",
+      imagesrc: "/brand-development.jpg",
     },
     {
       id: 12,
@@ -104,6 +115,7 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Zen Wellness",
       category: "account-recovery",
       image: "wellness brand social media",
+      imagesrc: "/bakre.jpg",
     },
   ];
 
@@ -185,14 +197,13 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
               <Card key={project.id} className="portfolio-card hover-lift">
                 <div className="portfolio-card-image-wrapper">
                   <ImageWithFallback
-                    src=""
+                    src={project.imagesrc}
                     alt={project.title}
                     className="portfolio-card-image"
                   />
                   <div className="portfolio-card-overlay">
                     <div className="portfolio-card-overlay-content">
                       <Eye className="portfolio-card-overlay-icon" />
-                      <ExternalLink className="portfolio-card-overlay-icon" />
                     </div>
                   </div>
                   <div className="portfolio-card-category">
