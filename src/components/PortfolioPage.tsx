@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import BeforeAfterImage from "./BeforeAfterImage";
+import BeforeAfterModal from "./BeforeAfterModal";
 import { Filter, ArrowRight, Eye } from "lucide-react";
 
 interface PortfolioPageProps {
@@ -10,6 +11,10 @@ interface PortfolioPageProps {
 
 export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
   const [activeFilter, setActiveFilter] = useState("all");
+  const [selectedProject, setSelectedProject] = useState<
+    (typeof projects)[0] | null
+  >(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const categories = [
     { id: "all", name: "All Projects" },
@@ -23,19 +28,21 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
   const projects = [
     {
       id: 1,
-      title: "Luxury Fashion Brand",
-      client: "Elite Couture",
+      title: "MBO Islamic Institute",
+      client: "MBO Islamic Institute",
       category: "social-media",
-      image: "fashion luxury brand social media",
-      imagesrc: "/social-media.jpg",
+      image: "MBO Islamic Institute social media",
+      beforeImage: "/mbobefore.jpeg",
+      afterImage: "/mboafter.png",
     },
     {
       id: 2,
-      title: "Restaurant Chain",
-      client: "Taste Haven",
-      category: "content-creation",
-      image: "restaurant food photography social media",
-      imagesrc: "/content-creation.jpg",
+      title: "Brand Development",
+      client: "Brand Development",
+      category: "brand-development",
+      image: "brand development",
+      beforeImage: "/prof.jpeg",
+      afterImage: "/proft.jpeg",
     },
     {
       id: 3,
@@ -43,23 +50,26 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Glow Cosmetics",
       category: "paid-advertising",
       image: "beauty brand marketing campaign",
-      imagesrc: "/paid-advertising.jpg",
+      beforeImage: "/hokbefore.jpeg",
+      afterImage: "/hokafter.jpeg",
     },
     {
       id: 4,
-      title: "Account Recovery Success",
-      client: "Tech Startup CEO",
-      category: "account-recovery",
-      image: "social media content creation professional",
-      imagesrc: "/account-recovery.jpg",
+      title: "Content Creation",
+      client: "Content Creation",
+      category: "content-creation",
+      image: "content creation",
+      beforeImage: "/cc.jpeg",
+      afterImage: "/cct.jpeg",
     },
     {
       id: 5,
       title: "E-commerce Branding",
       client: "Urban Lifestyle",
-      category: "brand-development",
+      category: "account-recovery",
       image: "ecommerce brand development design",
-      imagesrc: "/brand-development.jpg",
+      beforeImage: "/brand-development.jpg",
+      afterImage: "/brand-development.jpg",
     },
     {
       id: 6,
@@ -67,7 +77,8 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "FitLife Studios",
       category: "social-media",
       image: "fitness gym social media content",
-      imagesrc: "/social-media.jpg",
+      beforeImage: "/social-media.jpg",
+      afterImage: "/social-media.jpg",
     },
     {
       id: 7,
@@ -75,7 +86,8 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "Lagos Fashion Week",
       category: "paid-advertising",
       image: "fashion event marketing campaign",
-      imagesrc: "/paid-advertising.jpg",
+      beforeImage: "/paid-advertising.jpg",
+      afterImage: "/paid-advertising.jpg",
     },
     {
       id: 8,
@@ -83,46 +95,25 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
       client: "TechCorp Nigeria",
       category: "social-media",
       image: "corporate business linkedin content",
-      imagesrc: "/social-media.jpg",
-    },
-    {
-      id: 9,
-      title: "Hotel Brand Photography",
-      client: "Royal Suites",
-      category: "content-creation",
-      image: "luxury hotel photography marketing",
-      imagesrc: "/content-creation.jpg",
-    },
-    {
-      id: 10,
-      title: "Tech Product Launch",
-      client: "InnovateTech",
-      category: "paid-advertising",
-      image: "tech product launch marketing",
-      imagesrc: "/paid-advertising.jpg",
-    },
-    {
-      id: 11,
-      title: "Food Brand Identity",
-      client: "Fresh Harvest",
-      category: "brand-development",
-      image: "food brand identity design",
-      imagesrc: "/brand-development.jpg",
-    },
-    {
-      id: 12,
-      title: "Wellness Brand Recovery",
-      client: "Zen Wellness",
-      category: "account-recovery",
-      image: "wellness brand social media",
-      imagesrc: "/bakre.jpg",
-    },
+      beforeImage: "/social-media.jpg",
+      afterImage: "/social-media.jpg",
+    }
   ];
 
   const filteredProjects =
     activeFilter === "all"
       ? projects
       : projects.filter((project) => project.category === activeFilter);
+
+  const handleProjectClick = (project: (typeof projects)[0]) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   return (
     <div className="portfolio-page">
@@ -194,10 +185,15 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
         <div className="portfolio-container">
           <div className="portfolio-grid">
             {filteredProjects.map((project) => (
-              <Card key={project.id} className="portfolio-card hover-lift">
+              <Card
+                key={project.id}
+                className="portfolio-card hover-lift cursor-pointer"
+                onClick={() => handleProjectClick(project)}
+              >
                 <div className="portfolio-card-image-wrapper">
-                  <ImageWithFallback
-                    src={project.imagesrc}
+                  <BeforeAfterImage
+                    beforeImage={project.beforeImage}
+                    afterImage={project.afterImage}
                     alt={project.title}
                     className="portfolio-card-image"
                   />
@@ -262,6 +258,18 @@ export default function PortfolioPage({ onNavigate }: PortfolioPageProps) {
           </div>
         </div>
       </section>
+
+      {/* Before/After Modal */}
+      {selectedProject && (
+        <BeforeAfterModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          beforeImage={selectedProject.beforeImage}
+          afterImage={selectedProject.afterImage}
+          title={selectedProject.title}
+          client={selectedProject.client}
+        />
+      )}
     </div>
   );
 }

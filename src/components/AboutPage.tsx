@@ -21,10 +21,10 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
     {
       name: "Sheytimah Johnson",
       role: "Founder & Creative Director",
-      bio: "With over 6 years in digital marketing, Sheytimah leads our creative vision and strategic direction.",
+      bio: "Sheytimah leads our creative vision and strategic direction.",
       image:
-        "https://images.unsplash.com/photo-1581065178047-8ee15951ede6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGJ1c2luZXNzJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzU1MDMzOTMwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      expertise: ["Brand Strategy", "Creative Direction", "Account Recovery"],
+        "/shey.jpg",
+      expertise: ["Brand Strategy", "Creative Direction", "Account Recovery", "Founder"],
     },
     {
       name: "Babatunde Halimat",
@@ -39,7 +39,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       role: "Operations Manager",
       bio: "Jaafar brings brands to life through stunning visuals and compelling content that resonates with audiences.",
       image:
-        "/Bakre.jpg",
+        "/bakre.jpg",
       expertise: ["Operations Manager", "Social Media Management"],
     },
     {
