@@ -38,10 +38,19 @@ To get the EMAIL_PASS:
 
 ## Files Added/Modified
 
-- `api/submit-form.js` - Serverless function
+- `api/submit-form.js` - Serverless function (ES modules format)
+- `api/test.js` - Test endpoint to verify API is working
 - `vercel.json` - Updated to include API routes
 - `package.json` - Added nodemailer dependency
 - `src/components/BookingPage.tsx` - Updated to use the API
+
+## Testing the API
+
+Before testing the form submission, you can test if the API is working by visiting:
+
+- `https://sheym.vercel.app/api/test` - Should return a JSON response
+
+If this works, then the API routing is correct and the issue might be with the email configuration.
 
 ## Testing
 
