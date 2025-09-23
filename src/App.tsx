@@ -7,7 +7,7 @@ import AboutPage from './components/AboutPage';
 import ServicesPage from './components/ServicesPage';
 import PortfolioPage from './components/PortfolioPage';
 import BookingPage from './components/BookingPage';
-import ShopPage from './components/ShopPage';
+// import ShopPage from './components/ShopPage';
 
 export default function App() {
   const location = useLocation();
@@ -34,7 +34,7 @@ export default function App() {
           <Route path="/services" element={<ServicesPage onNavigate={handleNavigation} />} />
           <Route path="/portfolio" element={<PortfolioPage onNavigate={handleNavigation} />} />
           <Route path="/booking" element={<BookingPage />} />
-          <Route path="/shop" element={<ShopPage onNavigate={handleNavigation} />} />
+          {/* <Route path="/shop" element={<ShopPage onNavigate={handleNavigation} />} /> */}
           <Route path="*" element={<HomePage onNavigate={handleNavigation} />} />
         </Routes>
       </main>

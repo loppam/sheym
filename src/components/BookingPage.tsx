@@ -69,16 +69,67 @@ export default function BookingPage() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (formType: string) => {
-    // Simulate form submission
-    setSubmitStatus({
-      type: "success",
-      message: `${
-        formType === "consultation"
-          ? "Consultation request"
-          : "Recovery request"
-      } submitted successfully! We'll contact you within 24 hours.`,
-    });
+  const handleSubmit = async (formType: string) => {
+    try {
+      setSubmitStatus({ type: "loading", message: "Submitting..." });
+
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          formType,
+          formData,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: result.message,
+        });
+
+        // Reset form after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          serviceType: [],
+          message: "",
+          preferredContact: "",
+          platform: [],
+          issue: "",
+          username: "",
+          fullName: "",
+          linkedEmail: "",
+          linkedPhone: "",
+          altEmail: "",
+          disableDate: "",
+          appealedBefore: "",
+          appealDetails: "",
+          accountType: "",
+          country: "",
+          contactHandle: "",
+          paymentTier: "",
+          paymentMethod: "",
+          agreeToPolicy: false,
+        });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: result.error || "Failed to submit form. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus({
+        type: "error",
+        message: "Network error. Please check your connection and try again.",
+      });
+    }
   };
 
   const serviceOptions = [
@@ -128,13 +179,31 @@ export default function BookingPage() {
         </div>
       </section>
 
-      {/* Success Message */}
+      {/* Status Message */}
       {submitStatus.type && (
-        <section className="booking-success">
+        <section
+          className={`booking-${
+            submitStatus.type === "error" ? "error" : "success"
+          }`}
+        >
           <div className="page-container container-pad max-w-4xl">
-            <div className="booking-success-content">
-              <CheckCircle className="booking-success-icon" />
-              <span className="booking-success-text">
+            <div
+              className={`booking-${
+                submitStatus.type === "error" ? "error" : "success"
+              }-content`}
+            >
+              {submitStatus.type === "loading" ? (
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-sheytimah-accent"></div>
+              ) : submitStatus.type === "error" ? (
+                <AlertTriangle className="booking-error-icon" />
+              ) : (
+                <CheckCircle className="booking-success-icon" />
+              )}
+              <span
+                className={`booking-${
+                  submitStatus.type === "error" ? "error" : "success"
+                }-text`}
+              >
                 {submitStatus.message}
               </span>
             </div>
@@ -166,7 +235,10 @@ export default function BookingPage() {
             </TabsList>
 
             {/* General Consultation Form */}
-            <TabsContent value="consultation" className="space-y-6 sm:space-y-8">
+            <TabsContent
+              value="consultation"
+              className="space-y-6 sm:space-y-8"
+            >
               <div className="booking-form-card">
                 <div className="booking-form-header">
                   <h2 className="booking-form-title">
@@ -337,9 +409,16 @@ export default function BookingPage() {
                 <button
                   className="booking-submit-btn hover-lift"
                   onClick={() => handleSubmit("consultation")}
+                  disabled={submitStatus.type === "loading"}
                 >
-                  <Calendar className="booking-submit-icon" />
-                  Book Free Consultation
+                  {submitStatus.type === "loading" ? (
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  ) : (
+                    <Calendar className="booking-submit-icon" />
+                  )}
+                  {submitStatus.type === "loading"
+                    ? "Submitting..."
+                    : "Book Free Consultation"}
                 </button>
               </div>
             </TabsContent>
@@ -682,10 +761,18 @@ export default function BookingPage() {
                 <button
                   className="booking-submit-btn hover-lift"
                   onClick={() => handleSubmit("recovery")}
-                  disabled={!formData.agreeToPolicy}
+                  disabled={
+                    !formData.agreeToPolicy || submitStatus.type === "loading"
+                  }
                 >
-                  <ShieldCheck className="booking-submit-icon" />
-                  Submit Recovery Request
+                  {submitStatus.type === "loading" ? (
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  ) : (
+                    <ShieldCheck className="booking-submit-icon" />
+                  )}
+                  {submitStatus.type === "loading"
+                    ? "Submitting..."
+                    : "Submit Recovery Request"}
                 </button>
               </div>
             </TabsContent>

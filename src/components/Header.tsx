@@ -16,7 +16,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     { name: 'Services', href: 'services', hasDropdown: true },
     { name: 'Portfolio', href: 'portfolio' },
     { name: 'Booking', href: 'booking' },
-    { name: 'Shop', href: 'shop' },
+    // { name: 'Shop', href: 'shop' },
   ];
 
   const serviceLinks = [

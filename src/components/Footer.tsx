@@ -28,7 +28,7 @@ export default function Footer({ onNavigate }: FooterProps) {
     { name: "Services", href: "services" },
     { name: "Portfolio", href: "portfolio" },
     { name: "Booking", href: "booking" },
-    { name: "Shop", href: "shop" },
+    // { name: "Shop", href: "shop" },
   ];
 
   const services = [
@@ -225,7 +225,12 @@ export default function Footer({ onNavigate }: FooterProps) {
             <div className="footer-contact-info">
               <p className="footer-contact-item">
                 <span className="footer-contact-label">Email:</span>{" "}
-                sheytimahmedia@gmail.com
+                <a
+                  href="mailto:sheytimahmedia@gmail.com"
+                  className="footer-email-link"
+                >
+                  sheytimahmedia@gmail.com
+                </a>
               </p>
               <p className="footer-contact-item">
                 <span className="footer-contact-label">Location:</span> Nigeria
