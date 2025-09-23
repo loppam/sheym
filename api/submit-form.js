@@ -336,7 +336,7 @@ export default async function handler(req, res) {
 
     res.status(statusCode).json({
       error: errorMessage,
-      message: "Please try again or contact support if the problem persists",
+      message: "Please try again or contact support if the problem persists.",
       details:
         process.env.NODE_ENV === "development" ? error.message : undefined,
     });
