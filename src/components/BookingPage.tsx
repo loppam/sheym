@@ -120,14 +120,20 @@ export default function BookingPage() {
       } else {
         setSubmitStatus({
           type: "error",
-          message: result.error || "Failed to submit form. Please try again.",
+          message:
+            result.message ||
+            result.error ||
+            "Failed to submit form. Please try again.",
         });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitStatus({
         type: "error",
-        message: "Network error. Please check your connection and try again.",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Network error. Please check your connection and try again.",
       });
     }
   };

@@ -33,7 +33,46 @@ export default async function handler(req, res) {
     // Validate required fields
     if (!formType || !formData) {
       console.log("Missing required fields:", { formType, formData });
-      return res.status(400).json({ error: "Missing required fields" });
+      return res.status(400).json({
+        error: "Missing required fields",
+        message: "Form type and form data are required",
+      });
+    }
+
+    // Validate formType
+    if (!["consultation", "recovery"].includes(formType)) {
+      return res.status(400).json({
+        error: "Invalid form type",
+        message: "Form type must be either 'consultation' or 'recovery'",
+      });
+    }
+
+    // Basic validation for consultation form
+    if (formType === "consultation") {
+      if (!formData.name || !formData.email || !formData.message) {
+        return res.status(400).json({
+          error: "Missing required fields",
+          message:
+            "Name, email, and message are required for consultation requests",
+        });
+      }
+    }
+
+    // Basic validation for recovery form
+    if (formType === "recovery") {
+      if (
+        !formData.fullName ||
+        !formData.username ||
+        !formData.linkedEmail ||
+        !formData.platform ||
+        !formData.issue
+      ) {
+        return res.status(400).json({
+          error: "Missing required fields",
+          message:
+            "Full name, username, linked email, platform, and issue are required for recovery requests",
+        });
+      }
     }
 
     // Check if environment variables are set
@@ -276,10 +315,30 @@ export default async function handler(req, res) {
       } submitted successfully!`,
     });
   } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({
-      error: "Failed to send email",
-      details: error.message,
+    console.error("Error in submit-form function:", error);
+
+    // Provide more specific error messages based on error type
+    let errorMessage = "An unexpected error occurred";
+    let statusCode = 500;
+
+    if (error.code === "EAUTH") {
+      errorMessage =
+        "Email authentication failed. Please check email configuration.";
+      statusCode = 500;
+    } else if (error.code === "ECONNECTION") {
+      errorMessage =
+        "Unable to connect to email service. Please try again later.";
+      statusCode = 503;
+    } else if (error.message.includes("validation")) {
+      errorMessage = "Invalid form data provided";
+      statusCode = 400;
+    }
+
+    res.status(statusCode).json({
+      error: errorMessage,
+      message: "Please try again or contact support if the problem persists",
+      details:
+        process.env.NODE_ENV === "development" ? error.message : undefined,
     });
   }
 }

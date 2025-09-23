@@ -14,7 +14,12 @@
   ],
   "functions": {
     "api/submit-form.js": {
+      "runtime": "nodejs20.x",
       "maxDuration": 30
+    },
+    "api/test.js": {
+      "runtime": "nodejs20.x",
+      "maxDuration": 10
     }
   }
 }
