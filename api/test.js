@@ -1,3 +1,5 @@
+import nodemailer from "nodemailer";
+
 export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Credentials", true);
@@ -17,6 +19,21 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Test nodemailer import
+  let nodemailerTest = "failed";
+  try {
+    const testTransporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "test@example.com",
+        pass: "test",
+      },
+    });
+    nodemailerTest = "success";
+  } catch (error) {
+    nodemailerTest = `error: ${error.message}`;
+  }
+
   res.status(200).json({
     success: true,
     message: "API is working!",
@@ -26,6 +43,7 @@ export default async function handler(req, res) {
       hasEmailUser: !!process.env.EMAIL_USER,
       hasEmailPass: !!process.env.EMAIL_PASS,
       nodeVersion: process.version,
+      nodemailerTest,
     },
   });
 }
