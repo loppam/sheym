@@ -1,17 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "functions": {
     "api/submit-form.js": {
       "runtime": "nodejs20.x",

@@ -56,17 +56,23 @@ Visit these URLs after deployment:
    - ✅ Fixed: Updated `vercel.json` with proper runtime
    - ✅ Fixed: Corrected `createTransport` method
 
-2. **Email Not Sending**
+2. **Conflicting Functions and Builds Configuration**
+
+   - ✅ Fixed: Removed conflicting `builds` and `routes` configuration
+   - ✅ Fixed: Used modern Vercel configuration format
+   - ✅ Fixed: Separated static build config from functions config
+
+3. **Email Not Sending**
 
    - Check environment variables are set
    - Verify Gmail App Password is correct
    - Check Vercel function logs
 
-3. **CORS Errors**
+4. **CORS Errors**
 
    - ✅ Fixed: CORS headers are properly set
 
-4. **Function Not Found**
+5. **Function Not Found**
    - Ensure file is in `/api/` directory
    - Check `vercel.json` configuration
 
