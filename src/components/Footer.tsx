@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Linkedin, Twitter } from "lucide-react";
+import { Instagram, Linkedin, Twitter } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,10 +16,17 @@ interface FooterProps {
 
 export default function Footer({ onNavigate }: FooterProps) {
   const socialLinks = [
-    { name: "Instagram", icon: Instagram, href: "#" },
-    { name: "Facebook", icon: Facebook, href: "#" },
-    { name: "LinkedIn", icon: Linkedin, href: "#" },
-    { name: "Twitter/X", icon: Twitter, href: "#" },
+    {
+      name: "Instagram",
+      icon: Instagram,
+      href: "https://www.instagram.com/sheytimahmedia_",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/sheytimah-media-b86622386",
+    },
+    { name: "Twitter/X", icon: Twitter, href: "https://x.com/sheytimahm11838" },
   ];
 
   const quickLinks = [
@@ -293,9 +300,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               })}
             </div>
             <div className="space-y-2">
-              <p className="footer-additional-note">
-                Also find us on TikTok, Snapchat & Telegram
-              </p>
+              <p className="footer-additional-note">Also find us on TikTok</p>
               <div
                 className="footer-contact-btn"
                 onClick={() => onNavigate("booking")}
