@@ -19,7 +19,7 @@ interface AboutPageProps {
 export default function AboutPage({ onNavigate }: AboutPageProps) {
   const team = [
     {
-      name: "Sheytimah Johnson",
+      name: "Fatimah Hammed O.",
       role: "Founder & Creative Director",
       bio: "Sheytimah leads our creative vision and strategic direction.",
       image:
